@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Comparator;
 
 /**
- * TODO: Complete the implementation of this class.
+ *
  *
  * The keys in the heap must be stored in an array.
  *
@@ -27,7 +27,7 @@ public class Heap<E> implements PriorityQueue<E> {
 	private Comparator<E> comparator;
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Creates a heap whose elements are prioritized by the comparator.
 	 */
@@ -46,7 +46,7 @@ public class Heap<E> implements PriorityQueue<E> {
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Returns the top of this heap. This will be the highest priority key.
 	 * @throws NoSuchElementException if the heap is empty.
@@ -61,56 +61,100 @@ public class Heap<E> implements PriorityQueue<E> {
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Inserts the given key into this heap. Uses siftUp().
 	 */
-	public void insert(E key) {
+	public void insert(E key)
+	{
+		keys.add(key);
+		siftUp(keys.size() - 1);
 
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Removes and returns the highest priority key in this heap.
 	 * @throws NoSuchElementException if the heap is empty.
 	 */
-	public E delete() {
-		return null;
+	public E delete()
+	{
+		E highest = keys.get(0);
+		keys.set(0, keys.get(keys.size() - 1));
+		keys.remove(keys.size() - 1);
+		siftDown(0);
+		return highest;
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Restores the heap property by sifting the key at position p down
 	 * into the heap.
 	 */
 	public void siftDown(int p)
 	{
+		int parent = p;
+		// start with left child
+		int leftChild = getLeft(p);
+
+		while (leftChild < keys.size())
+		{
+			// find out the minimum /max amaong left and right children
+			// if left child is not at the end
+			if (leftChild < keys.size() - 1)
+			{
+				// and if left  child is bigger than its right sibling
+				if (comparator.compare(keys.get(leftChild + 1), keys.get(leftChild)) < 0)
+				{
+					leftChild ++;
+				}
+			}
+
+			if (comparator.compare (keys.get(leftChild), keys.get (parent)) >= 0)
+			{
+				break;
+			}
+			swap (leftChild, parent);
+			parent = leftChild;
+			leftChild = getLeft(parent);
+		}
 
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Restores the heap property by sifting the key at position q up
 	 * into the heap. (Used by insert()).
 	 */
 	public void siftUp(int q)
 	{
+		int child = q;
+		int parent;
+
+		while (child > 0)
+		{
+			parent = (child - 1) / 2;
+			if (comparator.compare(keys.get(child), keys.get(parent)) >= 0)
+				break;
+			swap(parent, child);
+			child = parent;
+		}
 
 	}
 
 	/**
-	 * TODO
+	 *
 	 *
 	 * Exchanges the elements in the heap at the given indices in keys.
 	 */
 	public void swap(int i, int j)
 	{
 		E tmp = keys.get(i);
-		keys.add(i, keys.get(j));
-		keys.add(j, tmp);
+		keys.set(i, keys.get(j));
+		keys.set(j, tmp);
 	}
 
 	/**
