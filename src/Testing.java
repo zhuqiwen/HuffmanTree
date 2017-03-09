@@ -250,6 +250,7 @@ public class Testing {
 		assertTrue(2 == ft.get('b'));
 		assertTrue(1 == ft.get('c'));
 		HuffmanTree ht = new HuffmanTree(ft);
+
 		assertTrue(7 == ht.root.priority);
 		assertTrue(3 == ht.root.left.priority);
 		assertTrue(4 == ht.root.right.priority);
