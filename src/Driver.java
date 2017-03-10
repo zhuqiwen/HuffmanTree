@@ -4,7 +4,7 @@ import org.junit.Test;
  * Running this driver will print some statistics about a small sample
  * text.
  *
- * TODO
+ *
  *
  * Once your code passes all the unit tests, replace text with the contents
  * of Alice In Wonderland. Figure out how to calculate the percentage of
