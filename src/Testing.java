@@ -261,17 +261,30 @@ public class Testing {
 		assertTrue('b' == ht.root.left.right.key);
 	}
 
-	//@Test
+	@Test
 	public void lookupHuff() {
 		HuffmanTree ht = new HuffmanTree(new FrequencyTable("aaaabbc"));
+
+//		ht.printOut();
+//		ht.lookup('a');
 		assertEquals("1", ht.lookup('a'));
 		assertEquals("01", ht.lookup('b'));
 		assertEquals("00", ht.lookup('c'));
+
+
+//
+		ht = new HuffmanTree(new FrequencyTable("aaaabbcdddddeeeeeff"));
+		assertEquals("00", ht.lookup('a'));
+		assertEquals("010", ht.lookup('b'));
+		assertEquals("0110", ht.lookup('c'));
+		assertEquals("11", ht.lookup('d'));
+		assertEquals("10", ht.lookup('e'));
 	}
 
-	//@Test
+	@Test
 	public void decodeHuff() {
 		HuffmanTree ht = new HuffmanTree(new FrequencyTable("aaaabbc"));
+
 		assertEquals('a', ht.decodeChar("1"));
 		assertEquals('b', ht.decodeChar("01"));
 		assertEquals('c', ht.decodeChar("00"));
@@ -280,6 +293,9 @@ public class Testing {
 	//@Test
 	public void catInHat() {
 		HuffmanTree ht = new HuffmanTree(new FrequencyTable("THE CAT IN THE HAT"));
+
+		ht.printOut();
+
 		assertTrue(18 == ht.root.priority);
 		assertTrue(8 == ht.root.left.priority);
 		assertTrue(10 == ht.root.right.priority);
@@ -321,7 +337,7 @@ public class Testing {
 		assertEquals(' ', ht.decodeChar("00000000000000"));
 	}
 
-	//@Test
+	@Test
 	public void simpleCodeBook() {
 		String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 				+ "bbbbbbbbbbbbb"
@@ -338,6 +354,11 @@ public class Testing {
 		assertEquals("1101", book.encodeChar('e'));
 		assertEquals("1100", book.encodeChar('f'));
 		HuffmanTree ht = book.getHuffmanTree();
+
+
+		System.out.println("simpleCodeBok test");
+		ht.printOut();
+//
 		assertTrue('a' == ht.decodeChar("0"));
 		assertTrue('b' == ht.decodeChar("101"));
 		assertTrue('c' == ht.decodeChar("100"));
@@ -352,7 +373,7 @@ public class Testing {
 		assertTrue('f' == ht.decodeChar("110000101010101010101001"));
 	}
 
-	//@Test
+	@Test
 	public void notInCodeBook() {
 		CodeBook book = new CodeBook("a");
 		try {
@@ -369,7 +390,7 @@ public class Testing {
 		}
 	}
 
-	//@Test
+	@Test
 	public void englishCodeBook() {
 		CodeBook english = new CodeBook();
 		assertEquals("010", english.encodeChar('a'));
@@ -400,7 +421,7 @@ public class Testing {
 		assertEquals("000010001", english.encodeChar('z'));
 	}
 
-	//@Test
+	@Test
 	public void smallZips() {
 		String text = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 				+ "bbbbbbbbbbbbb"
@@ -456,7 +477,7 @@ public class Testing {
 		assertEquals(text, zipper.decode(zipper.encode(text)));
 	}
 
-	//@Test
+	@Test
 	public void bigRandomZips() {
 		String text = makeUniformRandomText(10000);
 		CodeBook book = new CodeBook(text);
