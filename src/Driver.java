@@ -41,11 +41,11 @@ public class Driver {
 
 
 
-
-		for (int i = 0; i < books.length; i++)
-		{
-			bookTest(books[i], names[i]);
-		}
+		bookTest(books[2], names[2]);
+//		for (int i = 0; i < books.length; i++)
+//		{
+//			bookTest(books[i], names[i]);
+//		}
 
 
 	}
